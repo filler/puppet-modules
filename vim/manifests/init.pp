@@ -10,6 +10,9 @@ class vim {
     package { "vim-enhanced": }
 
     file { "/etc/vimrc":
+        owner => root,
+        group => root,
+        mode => 0644,
         source  => "puppet:///modules/vim/vimrc-$operatingsystem",
         require => Package["vim-enhanced"],
         links   => follow,
