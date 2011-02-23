@@ -6,21 +6,23 @@
 class munin-node {
   package { "munin-node": }
 
+  file {
+    "munin-node.conf":
+      owner     => "root",
+      group     => "root",
+      mode      => "644",
+      require   => Package["munin-node"],
+      default   => "/etc/munin/munin-node.conf",
+      content   => template("munin-node/munin-node.conf.erb"),
+  } # file
+
   service {
     "munin-node":
       enable    => "true",
       ensure    => "running",
       hasstatus => "true",
+      require   => "munin-node.conf",
+      subscribe => "munin-node.conf",
   } # service
 
-  file {
-    "/etc/munin/munin-node.conf":
-      owner     => "root",     
-      group     => "root",
-      mode      => "644",
-      require   => Package["munin-node"],
-      content   => template("munin-node/munin-node.conf.erb"),
-  } # file
-
 } # class munin-node
-
