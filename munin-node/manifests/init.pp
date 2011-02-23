@@ -18,7 +18,7 @@ class munin-node {
       owner     => "root",     
       group     => "root",
       mode      => "644",
-      require   => Package["munin-node"]
+      require   => Package["munin-node"],
       content   => template("munin-node/munin-node.conf.erb"),
   } # file
 
