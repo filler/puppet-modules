@@ -6,8 +6,8 @@
 class munin-node {
   package { 
     "munin-node": 
-      ensure    => present,
-      name      => munin-node,
+      ensure    => "present",
+      name      => "munin-node",
   } # package
 
   file {
