@@ -35,8 +35,8 @@ ignore_file \.pod$
 # may repeat the allow line as many times as you'd like
 
 allow ^127\.0\.0\.1$
-<% munin_server.each do |munin| %>
-allow @<%= munin %>
+<% munin_server.each do |munin-node| %>
+allow @<%= munin-node %>
 <% end %>
 
 # If you have installed the Net::CIDR perl module, you can use
