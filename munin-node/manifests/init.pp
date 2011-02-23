@@ -4,7 +4,10 @@
 # and applied to all nodes
 #
 class munin-node {
-  package { "munin-node": }
+  package { 
+    "munin-node": 
+      ensure => present
+  }
 
   file {
     "munin-node.conf":
@@ -12,7 +15,7 @@ class munin-node {
       group     => "root",
       mode      => "644",
       require   => Package["munin-node"],
-      default   => "/etc/munin/munin-node.conf",
+      path      => "/etc/munin/munin-node.conf",
       content   => template("munin-node/munin-node.conf.erb"),
   } # file
 
@@ -21,6 +24,7 @@ class munin-node {
       enable    => "true",
       ensure    => "running",
       hasstatus => "true",
+      pattern   => "munin-node",
       require   => "munin-node.conf",
       subscribe => "munin-node.conf",
   } # service
